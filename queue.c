@@ -55,3 +55,12 @@ int dequeue(Queue *q){
     q->size = q->size -1;
     return value;
 }
+
+void free_Queue(Queue *q){
+    free(q->data);
+    q->data = NULL;
+    q->capacity = 0;
+    q->size = 0;
+    q->front = 0;
+    q->rear = 0;
+}
