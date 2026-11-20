@@ -44,3 +44,14 @@ void enqueue(Queue *q, int num){
     q->rear = (q->rear +1)%q->capacity;
     q->size +=1;
 }
+
+int dequeue(Queue *q){
+    if(q->size == 0){
+        printf("Queue is empty\n");
+        exit(1);
+    }
+    int value = (q->data[q->front]);
+    q -> front = (q->front +1)%q->capacity;
+    q->size = q->size -1;
+    return value;
+}
