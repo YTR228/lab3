@@ -1,15 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
-typedef struct {
-    int *data;
-    int front;
-    int rear;
-    int size;
-    int capacity;
-} Queue;
-
+#include "queue.h"
 
 void init_Queue(Queue *q, int capacity) {
     q ->capacity = capacity;
