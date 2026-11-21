@@ -16,15 +16,17 @@ int partition(int *array, int left, int right){
     int pivot = array[(left +right)/2];
     int i = left;
     int j = right;
-    while (array[i] < pivot){i++;}
-    while (array[j] > pivot){j--;}
-    if (i >=j){}
-    else{
+    while (i<= j){
+        while (array[i] < pivot){i++;}
+        while (array[j] > pivot){j--;}
+        if (i >=j){break;}
         //swap(a[i++], a[j--])
-        int tmpi = array[i++];
-        int tmpj = array[j--];
-        array[j--] = tmpi;
-        array[i++] = tmpj;
+        int tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
+        i++;
+        j--;
+        
     }
     return j;
 }
