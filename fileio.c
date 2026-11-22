@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define N 2         
+#define MAX_LEN 256 
+
+
+int file_reading(char *filename) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) return 1;
+
+    char lines[N][MAX_LEN];
+    int count = 0;
+
+    while (fgets(lines[count % N], MAX_LEN, file) != NULL) {
+        count++;
+    }
+
+    int total = (count < N) ? count : N;
+    int start = (count < N) ? 0 : (count % N);
+
+    printf("Последние %d строк(и):\n", total);
+    for (int i = 0; i < total; i++) {
+        printf("%s", lines[(start + i) % N]);
+    }
+
+    fclose(file);
+    return 0;
+
+}
+int file_appending(char *filename){
+    #include <stdio.h>
+
+    FILE *file = fopen(filename, "a"); // Режим "a" всегда пишет в конец
+    if (file == NULL) {
+        perror("Ошибка открытия файла");
+        return 1;
+    }
+
+    fprintf(file, "Новая строка 1\n");
+    fprintf(file, "Новая строка 2\n");
+
+    fclose(file);
+    return 0;
+
+
+}

@@ -3,18 +3,27 @@
 #include <stdlib.h>
 #include "sorts.h"
 #include "queue.h"
+#include <time.h>
+#include "fileio.h"
+/*
+нужно добавить таймеры и сравнение алгоритмов
+ввод вывод данных через файл и без него
+сделать сравнение и графики
+метрики придумать
+*/
+
+
+
 
 int main(int argc, char *argv[]) {
-    // Проверяем, передан ли флаг --file и есть ли после него само имя файла
-    if (argc == 3 && strcmp(argv[1], "--file") == 0) {
-        const char *filename = argv[2];
-        
-        // Тут вызываем функцию чтения и вывода из filename
-        printf("Читаем файл: %s\n", filename);
-        return 0; // Завершаем программу, чтобы не идти в обычный ввод
+    for (int i = 1; i < argc; i++){
+        if (strcmp(argv[i], "--file") == 0){
+            file_reading(argv[i+1]);
+            return 0;
+        }
     }
-
-    // Если аргументов нет — идет обычный код (ввод чисел, сортировка, запись в файл)
-    printf("Обычный запуск программы\n");
     return 0;
+
 }
+
+
