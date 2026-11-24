@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define N 2         
-#define MAX_LEN 256 
+#define MAX_LEN 2048 
 
 
 int file_reading(char *filename) {
     FILE *file = fopen(filename, "r");
-    if (file == NULL) return 1;
+    if (file == NULL) {
+        perror("Ошибка открытия файла");
+        return 1;
+    }
 
     char lines[N][MAX_LEN];
     int count = 0;
@@ -28,9 +31,7 @@ int file_reading(char *filename) {
 
 }
 int file_appending(char *filename){
-    #include <stdio.h>
-
-    FILE *file = fopen(filename, "a"); // Режим "a" всегда пишет в конец
+    FILE *file = fopen(filename, "a");
     if (file == NULL) {
         perror("Ошибка открытия файла");
         return 1;
