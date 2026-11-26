@@ -86,11 +86,12 @@ int main(int argc, char *argv[]) {
             printf("Время сортировки выбором: %f секунд\n", selection_time);
             double quick_time = quick_time_spent(quick_sort, quick_array, 0, n - 1);
             printf("Время быстрой сортировки: %f секунд\n", quick_time);
+            printf("\n");
             printf("Отсортированный ряд: ");
             for (int i = 0; i < n; i++) {
                 printf("%d ", quick_array[i]);
             }
-            file_appending("output.txt", selection_array, n, "Отсортированный ряд:\n");
+            file_appending("output.txt", selection_array, n, "Отсортированный ряд:");
             
             
             free(array);
@@ -98,7 +99,7 @@ int main(int argc, char *argv[]) {
             free(quick_array);
         }
         free_Queue(&q);
-
+        printf("\n");
         printf("Повторить? (y/n): ");
         if (fgets(input, sizeof(input), stdin) == NULL || input[0] != 'y') {
             break;
