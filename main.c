@@ -4,34 +4,9 @@
 #include "sorts.h"
 #include "queue.h"
 #include "fileio.h"
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <limits.h>
 #include "timer.h"
+#include "benchmark.h"
 
-int parse_line(char *line, Queue *q) {
-    int count = 0;
-    char *word = strtok(line, " \t\n");          /* первое слово */
-
-    while (word != NULL) {
-        char *end;
-        errno = 0;
-        long value = strtol(word, &end, 10);     /* слово -> число */
-
-        if (*end != '\0') {                      /* после числа мусор: "abc", "12abc", "-" */
-            return -1;
-        }
-        if (errno == ERANGE || value < INT_MIN || value > INT_MAX) {  /*проверка диапазона */
-            return -1;
-        }
-
-        enqueue(q, (int)value);
-        count++;
-        word = strtok(NULL, " \t\n");            /* следующее слово */
-    }
-    return count;
-}
 
 
 
@@ -42,16 +17,21 @@ int main(int argc, char *argv[]) {
         file_reading(argv[2]);
         return 0;
     }
+    if (argc == 3 && strcmp(argv[1], "--benchmark") == 0) {
+        return run_benchmark(argv[2]);
+    }
+
     /* Любые другие аргументы — ошибка */
     if (argc != 1) {
         printf("Использование: %s [--file имя_файла]\n", argv[0]);
         return 1;
     }
-
+    
     char input[4096];
 
     while (1) {
         printf("Введите числа через пробел:\n");
+
         if (fgets(input, sizeof(input), stdin) == NULL) {   /* Ctrl+D */
             break;
         }
@@ -103,14 +83,23 @@ int main(int argc, char *argv[]) {
             memcpy(quick_array, array, n * sizeof(int));
 
             double selection_time = time_spent(selection_sort, selection_array, n); 
+            printf("Время сортировки выбором: %f секунд\n", selection_time);
             double quick_time = quick_time_spent(quick_sort, quick_array, 0, n - 1);
+            printf("Время быстрой сортировки: %f секунд\n", quick_time);
+            printf("Отсортированный ряд: ");
+            for (int i = 0; i < n; i++) {
+                printf("%d ", quick_array[i]);
+            }
             file_appending("output.txt", selection_array, n, "Отсортированный ряд:");
             
             
             free(array);
+            free(selection_array);
+            free(quick_array);
         }
         free_Queue(&q);
 
+        printf("\n");
         printf("Повторить? (y/n): ");
         if (fgets(input, sizeof(input), stdin) == NULL || input[0] != 'y') {
             break;

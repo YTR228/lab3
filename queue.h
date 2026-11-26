@@ -1,3 +1,5 @@
+#ifndef QUEUE_H
+#define QUEUE_H
 typedef struct {
     int *data;
     int front;
@@ -10,3 +12,4 @@ void init_Queue(Queue *q, int capacity);
 void enqueue(Queue *q, int num);
 int dequeue(Queue *q);
 void free_Queue(Queue *q);
+#endif
