@@ -30,7 +30,7 @@ int file_reading(char *filename) {
     return 0;
 
 }
-int file_appending(char *filename, int *array_str,int size,char message) {
+int file_appending(char *filename, int *array_str,int size,char *message) {
     FILE *file = fopen(filename, "a");
     if (file == NULL) {
         perror("Ошибка открытия файла");

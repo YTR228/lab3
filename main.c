@@ -81,7 +81,30 @@ int main(int argc, char *argv[]) {
                 printf("%d ", array[i]);
             }
             printf("\n");
+
             file_appending("output.txt", array, n, "Исходный ряд:");
+            int *selection_array = malloc(n * sizeof(int));
+            if (selection_array == NULL) {
+                printf("Не хватило памяти.\n");
+                free(array);
+                free_Queue(&q);
+                return 1;
+            }
+            memcpy(selection_array, array, n * sizeof(int));
+
+            int *quick_array = malloc(n * sizeof(int));
+            if (quick_array == NULL) {
+                printf("Не хватило памяти.\n");
+                free(array);
+                free(selection_array);
+                free_Queue(&q);
+                return 1;
+            }
+            memcpy(quick_array, array, n * sizeof(int));
+
+            double selection_time = time_spent(selection_sort, selection_array, n); 
+            double quick_time = quick_time_spent(quick_sort, quick_array, 0, n - 1);
+            file_appending("output.txt", selection_array, n, "Отсортированный ряд:");
             
             
             free(array);
