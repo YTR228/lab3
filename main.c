@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
             for (int i = 0; i < n; i++) {
                 printf("%d ", quick_array[i]);
             }
-            file_appending("output.txt", selection_array, n, "Отсортированный ряд:");
+            file_appending("output.txt", selection_array, n, "Отсортированный ряд:\n");
             
             
             free(array);
@@ -99,7 +99,6 @@ int main(int argc, char *argv[]) {
         }
         free_Queue(&q);
 
-        printf("\n");
         printf("Повторить? (y/n): ");
         if (fgets(input, sizeof(input), stdin) == NULL || input[0] != 'y') {
             break;

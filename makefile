@@ -1,6 +1,6 @@
 lab3: main.o sorts.o queue.o fileio.o timer.o benchmark.o
-	gcc -o lab3 main.o sorts.o queue.o fileio.o timer.o
-main.o: main.c sorts.h queue.h fileio.h timer.h
+	gcc -o lab3 main.o sorts.o queue.o fileio.o timer.o benchmark.o
+main.o: main.c sorts.h queue.h fileio.h timer.h benchmark.h
 	gcc -c -o main.o main.c
 sorts.o: sorts.c sorts.h
 	gcc -c -o sorts.o sorts.c
