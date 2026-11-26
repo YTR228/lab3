@@ -8,6 +8,7 @@
 #include <string.h>
 #include <errno.h>
 #include <limits.h>
+#include "timer.h"
 
 int parse_line(char *line, Queue *q) {
     int count = 0;
@@ -80,8 +81,9 @@ int main(int argc, char *argv[]) {
                 printf("%d ", array[i]);
             }
             printf("\n");
-
-
+            file_appending("output.txt", array, n, "Исходный ряд:");
+            
+            
             free(array);
         }
         free_Queue(&q);

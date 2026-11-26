@@ -30,15 +30,17 @@ int file_reading(char *filename) {
     return 0;
 
 }
-int file_appending(char *filename){
+int file_appending(char *filename, int *array_str,int size,char message) {
     FILE *file = fopen(filename, "a");
     if (file == NULL) {
         perror("Ошибка открытия файла");
         return 1;
     }
-
-    fprintf(file, "Новая строка 1\n");
-    fprintf(file, "Новая строка 2\n");
+    fprintf(file, "%s ", message);
+    for (int i = 0; i < size; i++) {
+        fprintf(file, "%d ", array_str[i]);
+    }
+    fprintf(file, "\n");
 
     fclose(file);
     return 0;
